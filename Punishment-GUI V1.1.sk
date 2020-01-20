@@ -1,0 +1,66 @@
+                                    #=============================#
+                                    #  PUNISH GUI - BY CASTOLOGR  #
+                                    #=============================#
+	
+command /punish [<offlineplayer>] [<text>]:
+	permission: punish.use
+	permission message: &cYou have no permission to punish other players!
+	trigger:
+		if arg-1 is not set:
+			send "&cPlease specify a player!"
+			stop
+		else:
+			open chest with 6 row named "&c&lPlayer Punished: &2%arg-1%" to player
+			wait 1 tick
+			format slot 0 of player with paper named "&c&lPermanent Ban" to run [execute console command "/ban %arg-1% %arg-2%"]
+			format slot 1 of player with paper named "&c&lTemporary Ban" to run [execute player command "/tban %arg-1% %arg-2%"]
+			format slot 2 of player with paper named "&c&lMute" to run [execute player command "/mute %arg-1% %arg-2%"]
+			stop
+			
+command /tban [<offlineplayer>] [<text>]:
+	permission: tban.use
+	permission message: &cYou have no permission to punish other players!
+	trigger:
+		if arg-1 is not set:
+			send "&cPlease specify a player!"
+			stop
+		else:
+			open chest with 6 row named "&c&lPick A TempBan Duration" to player
+			wait 1 tick
+			format slot 0 of player with paper named "&c&l1d TempBan" to run [execute console command "/tempban %arg-1% 1d %arg-2%"]->[execute console command "/broadcast &e%arg-1% &chas been banned for &e%arg-2% &cfrom the server!"]
+			format slot 1 of player with paper named "&c&l3d TempBan" to run [execute console command "/tempban %arg-1% 3d %arg-2%"]->[execute console command "/broadcast &e%arg-1% &chas been banned for &e%arg-2% &cfrom the server!"]
+			format slot 2 of player with paper named "&c&l5d TempBan" to run [execute console command "/tempban %arg-1% 5d %arg-2%"]->[execute console command "/broadcast &e%arg-1% &chas been banned for &e%arg-2% &cfrom the server!"]
+			format slot 3 of player with paper named "&c&l7d TempBan" to run [execute console command "/tempban %arg-1% 7d %arg-2%"]->[execute console command "/broadcast &e%arg-1% &chas been banned for &e%arg-2% &cfrom the server!"]
+			format slot 4 of player with paper named "&c&l14d TempBan" to run [execute console command "/tempban %arg-1% 14d %arg-2%"]->[execute console command "/broadcast &e%arg-1% &chas been banned for &e%arg-2% &cfrom the server!"]
+			format slot 5 of player with paper named "&c&l30d TempBan" to run [execute console command "/tempban %arg-1% 30d %arg-2%"]->[execute console command "/broadcast &e%arg-1% &chas been banned for &e%arg-2% &cfrom the server!"]
+		stop
+		
+command /mute [<offlineplayer>] [<text>]:
+	permission: mute.use
+	permission message: &cYou have no permission to punish other players!
+	trigger:
+		if arg-1 is not set:
+			send "&cPlease specify a player!"
+			stop
+		else:
+			open chest with 6 row named "&c&lPick A Mute Duration" to player
+			wait 1 tick
+			format slot 0 of player with paper named "&c&l1d Mute" to run [execute console command "/mute %arg-1% 1d %arg-2%"]->[execute console command "/broadcast &e%arg-1% &chas been muted for &e%arg-2%&c"]
+			format slot 1 of player with paper named "&c&l3d Mute" to run [execute console command "/mute %arg-1% 3d %arg-2%"]->[execute console command "/broadcast &e%arg-1% &chas been muted for &e%arg-2%&c!"]
+			format slot 2 of player with paper named "&c&l5d Mute" to run [execute console command "/mute %arg-1% 5d %arg-2%"]->[execute console command "/broadcast &e%arg-1% &chas been muted for &e%arg-2%&c!"]
+			format slot 3 of player with paper named "&c&l7d Mute" to run [execute console command "/mute %arg-1% 7d %arg-2%"]->[execute console command "/broadcast &e%arg-1% &chas been muted for &e%arg-2%&c!"]
+			format slot 4 of player with paper named "&c&l14d Mute" to run [execute console command "/mute %arg-1% 14d %arg-2%"]->[execute console command "/broadcast &e%arg-1% &chas been muted for &e%arg-2%&c!"]
+			format slot 5 of player with paper named "&c&lPermanent Mute" to run [execute console command "/mute %arg-1% %arg-2%"]->[execute console command "/broadcast &e%arg-1% &chas been muted for &e%arg-2%&c!"]
+		stop
+		
+command /unmute [<offlineplayer>]:
+	permission: unmute.use
+	permission message: &cYou have no permission to unmute players!
+	trigger:
+		if arg-1 is not set:
+			send "&cPlease specify a player!"
+			stop
+		else:
+			execute console command "/mute %arg-1% 1s"
+			send "&e%arg-1% &ahas been unmuted!"
+			stop
